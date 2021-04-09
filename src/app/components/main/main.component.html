@@ -1,0 +1,171 @@
+<h1 class="title">Personas</h1>
+<app-people class="people"></app-people>
+<div class="formstruct">
+    <form [formGroup]='peopleFormGroup'
+            #formDirective="ngForm"
+            (ngSubmit)="addUser(formDirective)"
+            class="form">
+
+            <div class="item">
+                <mat-form-field class="input" appearance="legacy">
+                    <mat-label>Nombre</mat-label>
+                    <mat-icon class="iconinput"
+                            matPrefix>person</mat-icon> 
+                    <input type="text" 
+                            matInput
+                            formControlName="name" 
+                            required >
+                    <button mat-button *ngIf="peopleFormGroup.get('name').value"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="clearFields('name')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngFor="let error of errorForm.name">
+                        <mat-error class="error-message"
+                                    *ngIf="
+                                        peopleFormGroup.get('name').hasError(error.type) &&
+                                        (peopleFormGroup.get('name').dirty ||
+                                        peopleFormGroup.get('name').touched)
+                                    ">
+                            {{error.message}}
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="item">
+                <mat-form-field  class="input" appearance="legacy">
+                    <mat-label>Correo electrónico</mat-label>
+                    <mat-icon class="iconinput"
+                            matPrefix>email</mat-icon> 
+                    <input type="email" 
+                            matInput
+                            formControlName="email" 
+                            required >
+                    <button mat-button *ngIf="peopleFormGroup.get('email').value"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="clearFields('email')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngFor="let error of errorForm.email">
+                        <mat-error class="error-message"
+                                    *ngIf="
+                                        peopleFormGroup.get('email').hasError(error.type) &&
+                                        (peopleFormGroup.get('email').dirty ||
+                                        peopleFormGroup.get('email').touched)
+                                    ">
+                            {{error.message}}
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="item">
+                <mat-form-field  class="input" appearance="legacy">
+                    <mat-label>Edad</mat-label>
+                    <mat-icon class="iconinput"
+                            matPrefix>perm_contact_calendar</mat-icon> 
+                    <input type="number" 
+                            matInput
+                            formControlName="age" 
+                            required >
+                    <button mat-button *ngIf="peopleFormGroup.get('age').value"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="clearFields('age')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngFor="let error of errorForm.age">
+                        <mat-error class="error-message"
+                                    *ngIf="
+                                        peopleFormGroup.get('age').hasError(error.type) &&
+                                        (peopleFormGroup.get('age').dirty ||
+                                        peopleFormGroup.get('age').touched)
+                                    ">
+                            {{error.message}}
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="item">
+                <mat-form-field  class="input" appearance="legacy">
+                    <mat-label>Telefono</mat-label>
+                    <mat-icon class="iconinput"
+                            matPrefix>phone</mat-icon> 
+                    <input type="text" 
+                            matInput
+                            formControlName="phone" 
+                            required >
+                    <button mat-button *ngIf="peopleFormGroup.get('phone').value"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="clearFields('phone')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngFor="let error of errorForm.phone">
+                        <mat-error class="error-message"
+                                    *ngIf="
+                                        peopleFormGroup.get('phone').hasError(error.type) &&
+                                        (peopleFormGroup.get('phone').dirty ||
+                                        peopleFormGroup.get('phone').touched)
+                                    ">
+                            {{error.message}}
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="item item-full">
+                <label for="gender" class="label">
+                    ¿Cuál es tu gendero?
+                    <span *ngIf="peopleFormGroup.get('gender').hasError('required') && 
+                    (peopleFormGroup.get('gender').dirty || 
+                    peopleFormGroup.get('gender').touched)">/</span>
+                    <span class="error-gender" 
+                        *ngIf="peopleFormGroup.get('gender').hasError('required') && 
+                                (peopleFormGroup.get('gender').dirty || 
+                                peopleFormGroup.get('gender').touched)"> Seleccionar un gendero</span>
+                </label>
+                <mat-radio-group formControlName="gender" class="radio" color='primary' aria-label="¿Cuál es tu gendero?" [required]="true" #gender>
+                    <mat-radio-button value="Hombre">Hombre</mat-radio-button>
+                    <mat-radio-button value="Mujer">Mujer</mat-radio-button> 
+                    <mat-radio-button value="NO binario">No binario</mat-radio-button> 
+                </mat-radio-group>
+            </div>
+            <div class="item item-file">
+                    <mat-label>Documento</mat-label>
+                    <input type="file" 
+                            formControlName="documents" 
+                            required 
+                            (change)="onFileSelect($event)">
+                    <mat-error *ngFor="let error of errorForm.document">
+                        <mat-error class="error-message"
+                                    *ngIf="
+                                        peopleFormGroup.get('documents').hasError(error.type) &&
+                                        (peopleFormGroup.get('documents').dirty ||
+                                        peopleFormGroup.get('documents').touched)
+                                    ">
+                            {{error.message}}
+                        </mat-error>
+                    </mat-error>
+            </div>
+
+            <div class="item">
+                <button class="btn btn-lg" type="submit" mat-raised-button color="primary">
+                    <div class="contentbtn">
+                        <div *ngIf="load" class="load">
+                            <mat-spinner></mat-spinner>
+                        </div>
+                        <p *ngIf="!load">AGREGAR</p>
+                        <p *ngIf="load">PROCESANDO</p>
+                    </div>
+                </button>
+            </div>
+    </form>
+</div>

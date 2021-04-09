@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+  }
+
+tr > th {
+  color: white;
+  background-color: #3F51B5;
+}
+tr:nth-child(2n) {
+  background-color: #F2F9FF;
+}
